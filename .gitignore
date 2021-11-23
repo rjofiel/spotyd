@@ -44,6 +44,7 @@ testem.log
 /environments
 environment.prod.ts
 environment.ts
+firebaseConfig.ts
 .env
 
 # System Files
