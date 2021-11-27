@@ -40,6 +40,7 @@ const environmentContent = `export const environment = {
       apiKey: '${process.env.FIREBASE_API_KEY}',
       authDomain: '${process.env.AUTHDOMAIN}',
       projectId: '${process.env.PROJECTID}',
+      databaseURL: '${process.env.DATABASEURL}',
       storageBucket: '${process.env.STORAGEBUCKET}',
       messagingSenderId: '${process.env.MESSAGINGSENDERID}',
       appId: '${process.env.APPID}'
