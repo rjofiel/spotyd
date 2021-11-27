@@ -15,7 +15,6 @@ function writeFileUsingFS(targetPath: string, environmentFileContent: string) {
     }
 
     if (environmentFileContent !== '') {
-      console.log(process.env.FIREBASE_API_KEY)
       console.log(`Wrote variables to ${targetPath}`);
     }
   });
@@ -24,7 +23,6 @@ function writeFileUsingFS(targetPath: string, environmentFileContent: string) {
 const envDirectory = 'src/environments';
 const prodConfig = `${envDirectory}/environment.prod.ts`;
 const devConfig = `${envDirectory}/environment.ts`;
-
 
 if (!existsSync(envDirectory)) {
   mkdirSync(envDirectory);
@@ -38,7 +36,14 @@ const targetPath = isProduction ? prodConfig : devConfig;
 
 const environmentContent = `export const environment = {
     production: ${isProduction},
-    FIREBASE_API_KEY: '${process.env.FIREBASE_API_KEY}'
+    FIREBASE_API_CONFIG: {
+      apiKey: '${process.env.FIREBASE_API_KEY}',
+      authDomain: '${process.env.AUTHDOMAIN}',
+      projectId: '${process.env.PROJECTID}',
+      storageBucket: '${process.env.STORAGEBUCKET}',
+      messagingSenderId: '${process.env.MESSAGINGSENDERID}',
+      appId: '${process.env.APPID}'
+    }
   }`
 
 writeFileUsingFS(targetPath, environmentContent);
