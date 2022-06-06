@@ -38,11 +38,13 @@ export class AuthService {
   }
 
   isUserLogged(): void {
-    getAuth().onAuthStateChanged((user) => {
-      if (user) {
-        this._router.navigate(['/home']);
-      }
-    });
+    this._router.navigate(['/home']);
+
+    // getAuth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     this._router.navigate(['/home']);
+    //   }
+    // });
   }
 
 
