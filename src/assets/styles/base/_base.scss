@@ -1,0 +1,179 @@
+@import 'variables';
+
+/*** Base ***/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: $roboto;
+  font-size: $font-size-m;
+  color: $color-black;
+  line-height: 1.7;
+}
+
+
+@responsive {
+  h1,
+  h2,
+  h3,
+  .headline-1,
+  .headline-2,
+  .headline-3 {
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    font-weight: 700;
+  }
+
+  .headline-0 {
+    font-size: $font-size-xxxl; //3rem
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  .headline-1 {
+    font-size: $font-size-xxl; //2.5rem
+    line-height: 1;
+  }
+
+  h1,
+  .headline-2 {
+    font-size: $font-size-xl; //2rem
+    line-height: 1;
+  }
+
+  h2,
+  .headline-3 {
+    font-size: $font-size-l; //1.5rem
+    line-height: 1;
+  }
+
+  .title-l,
+  .title-m,
+  .title-s,
+  .title-xs,
+  .micro {
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    font-weight: 500;
+  }
+
+  .title-l {
+    font-size: $font-size-ml; //20px
+    line-height: 1.2;
+  }
+
+  .title-m {
+    font-size: $font-size-m; //16px
+    line-height: 1.25;
+  }
+
+  .title-s {
+    font-size: $font-size-ms; //14px
+    line-height: 1.28;
+  }
+
+  .title-xs {
+    font-size: $font-size-s; //12px
+    line-height: 1.33;
+  }
+
+  .micro {
+    font-size: $font-size-xs; //10px
+    line-height: 1;
+  }
+
+  .body-l,
+  .body-m,
+  .body-s,
+  .body-xs {
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    font-weight: normal;
+  }
+
+  .body-l {
+    font-size: $font-size-ml; //20px
+    line-height: 1.2;
+  }
+
+  .body-m {
+    font-size: $font-size-m; //16px
+    line-height: 1.25;
+  }
+
+  .body-s {
+    font-size: $font-size-ms; //14px
+    line-height: 1.28;
+  }
+
+  .body-xs {
+    font-size: $font-size-s; //12px
+    line-height: 1.33;
+  }
+}
+
+// Style to fit an image without resize
+// Class frame-image-base is for the img container
+.frame-image-base {
+  // add with and height in the container component
+  display: inline-block;
+  position: relative;
+
+  img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+.fit-image-base {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: initial;
+}
+
+
+.container-full-width {
+  max-width: 90rem;
+  width: 83.5625rem;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-full-width {
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tablet-full-width {
+  max-width: 1024px;
+  margin: 0 auto;
+  width: 100%;
+}
