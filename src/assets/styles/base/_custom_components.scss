@@ -1,0 +1,64 @@
+@import 'variables';
+
+button {
+
+  &.size-xl {
+    padding: 1rem 4.5rem;
+  }
+  &.size-l {
+    padding: 1rem 4rem;
+  }
+  &.size-m {
+    padding: 0.75rem 3rem;
+  }
+  &.size-s {
+    padding: 0.5rem 2rem;
+  }
+  &.size-xs {
+    padding: .25rem 16px;
+  }
+
+  // Primary
+  &.btn-primary {
+    border-radius: 38px;
+    background-color: $color-primary;
+    color: white;
+
+    .material-icons-outlined {
+      color: white;
+    }
+
+    &:hover {
+      background-color: $color-primary-l2;
+    }
+    &:focus {
+      background-color: $color-primary-l1;
+    }
+    &:disabled {
+      background-color: $color-neutral;
+    }
+  }
+
+  //Secondary
+  &.btn-secondary {
+    border-radius: 38px;
+    border: 1px solid $color-primary-d1;
+    color: $color-black;
+
+    .material-icons-outlined {
+      color: $color-black;
+    }
+
+    &:hover {
+      background-color: $color-primary-l2;
+      color: white;
+    }
+    &:focus {
+      background-color: $color-primary-l1;
+      color: white;
+    }
+    &:disabled {
+      background-color: $color-neutral;
+    }
+  }
+}
