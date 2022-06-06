@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Auth, User } from '@firebase/auth';
-import { UserData } from 'src/assets/interfaces/user-data';
 import { AuthService } from 'src/auth/auth.service';
 
 @Component({
@@ -12,9 +10,9 @@ import { AuthService } from 'src/auth/auth.service';
 export class PagesComponent {
 
   constructor(
-    private _auth: AuthService
+    // private _auth: AuthService
   ) {
-    this._auth.isUserLogged();
+    // this._auth.isUserLogged();
   }
 
 

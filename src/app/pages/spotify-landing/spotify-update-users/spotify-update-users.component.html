@@ -1,0 +1,123 @@
+<div class="theme-full-width">
+  <div class="px-4 md:px-0">
+
+    <h1>Spotify User</h1>
+    <div class="flex w-full space-x-4">
+    <div class="card">
+      <form [formGroup]="spotifyUserForm">
+        <h2 class="title-l">User details</h2>
+        <div class="ml-auto max-w-[45%]">
+          <mat-form-field  class="w-full" *ngIf="familiesOptions$ | async as familiesOptions" >
+            <mat-label>Family</mat-label>
+            <mat-select formControlName="status" (valueChange)="selectedFamily($event)">
+              <mat-option value="" [disabled]="true" selected>Select a family</mat-option>
+              <div *ngFor="let option of familiesOptions">
+                <mat-option [value]="option.number">Familiy {{option?.number}} - {{option?.email}}</mat-option>
+              </div>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- NAME -->
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Name</mat-label>
+            <input matInput type="text" formControlName="name" placeholder="Full name or username">
+          </mat-form-field>
+        </div>
+
+        <!-- EMAIL -->
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" placeholder="Email account or contact">
+          </mat-form-field>
+        </div>
+
+        <!-- PASSWORD -->
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Password">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field class="w-full">
+            <mat-label>Collection date</mat-label>
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <input matInput [matDatepicker]="picker" formControlName="startDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <div class="flex space-x-4">
+          <!-- PHONE -->
+          <div class="w-full">
+            <mat-form-field class="w-full" >
+              <mat-label>Phone number</mat-label>
+              <input matInput type="number" formControlName="phone" placeholder="Contact user">
+            </mat-form-field>
+          </div>
+
+          <!-- STATUS USER -->
+          <div class="w-full">
+            <mat-form-field  class="w-full" *ngIf="selectorOptions$ | async as selectorOptions" >
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="" [disabled]="true" selected>Select a valid status</mat-option>
+                <div *ngFor="let option of selectorOptions">
+                  <mat-option [value]="option?.value">{{option?.key}}</mat-option>
+                </div>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="w-full my-2">
+          <button buttonPrimaryStyle class="w-full" [size]="btnSize.m" (click)="onClickSaveUser()">
+            Save user
+          </button>
+      </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <ng-container *ngIf="familySelected$ | async as familySpotifySelected; else FamilyNoSelected">
+        <h2 class="text-center">The {{spotifyUserForm.get('name')?.value ? spotifyUserForm.get('name')?.value: 'user'}} belongs to this family</h2>
+        <div>
+          <span>ID: </span>
+          <h3>Family number: {{familySpotifySelected?.number}}</h3>
+        </div>
+        <div class="flex space-x-2">
+          <p>Email: {{familySpotifySelected?.email}}</p>
+          <p>{{familySpotifySelected?.members?.length}} of 5 members</p>
+        </div>
+        <div>
+          <div>
+            <p>Members of this family</p>
+            <div class="text-left px-2">
+              <ng-container *ngFor="let user of familySpotifySelected?.members">
+                <p>{{user.name}} - <span >{{user.status}}</span></p>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-template #FamilyNoSelected>
+      <div class="flex-col flex justify-center items-center h-full">
+      <h2 class="text-center">You have not select a valid family</h2>
+        <p>If there is no free space in the other families, should one more family be created?</p>
+        <div class="max-w-[10.25rem]">
+            <button buttonPrimaryStyle [size]="btnSize.m">
+              Create
+            </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+  </div>
+</div>

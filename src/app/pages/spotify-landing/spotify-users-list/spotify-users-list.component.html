@@ -1,0 +1,73 @@
+<div class="px-4">
+  <div class="flex justify-between items-center">
+    <div class="min-w-[10rem] h-8">
+      <button buttonSecondaryStyle class="w-full h-full " (click)="onClickCreateNewSpotifyUser()">Create new user</button>
+    </div>
+    <div class="max-w-[25rem] w-full">
+      <mat-form-field class="w-full" appearance="fill">
+        <mat-label>Global search</mat-label>
+        <input matInput type="text">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="spotifyUsersList$ | async" class="w-full">
+    <!-- ID -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let spotifyUser">{{spotifyUser?.id}}</td>
+    </ng-container>
+
+    <!-- NAME -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let spotifyUser">{{spotifyUser?.name}}</td>
+    </ng-container>
+
+    <!-- EMAIL -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let spotifyUser">{{spotifyUser?.email}}</td>
+    </ng-container>
+
+    <!-- DATE -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let spotifyUser">{{spotifyUser?.startDate}}</td>
+    </ng-container>
+
+    <!-- STATUS -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let spotifyUser">
+        <span class="flex w-full" [class]="spotifyUser?.status?.toLowerCase()">
+          {{spotifyUser?.status}}
+        </span>
+
+      </td>
+    </ng-container>
+
+    <!-- ACTION -->
+    <ng-container matColumnDef="action" >
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let spotifyUser">
+        <div class="flex space-x-2">
+          <div>
+            <!-- <button buttonPrimaryStyle [size]="btnSize.xs" [routerLink]="['/spotify',spotifyUser?.id, 'edit']">EDIT</button> -->
+            <app-icon-button  (clicked)="onSpotifyUserClickedRedirecToEdit(spotifyUser?.id)"  [label]="'Redirect to user page to edit'"  [iconName]="'brush'"></app-icon-button>
+          </div>
+          <div>
+            <!-- <button (click)="onSpotifyUserClickedRemove(spotifyUser?.id)" buttonPrimaryStyle [disabled]="spotifyUser?.email === 'iwalklate2@unicef.org'"  [size]="btnSize.xs">REMOVE</button> -->
+            <app-icon-button (clicked)="onSpotifyUserClickedRemove(spotifyUser?.id)"  [label]="'Remove user'" [iconName]="'delete_forever'"></app-icon-button>
+
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToShow"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToShow;"></tr>
+
+  </table>
+
+</div>

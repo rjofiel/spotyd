@@ -1,62 +1,17 @@
-<div>
-  <div>
-    <h1>Add new user</h1>
-    <div>
-      <form [formGroup]="createNewUserSpotify" class="flex flex-col" (ngSubmit)="setInfoUser()">
-        <mat-form-field appearance="outline">
-          <mat-label for="email">Email: </mat-label>
-          <input id="email" type="text" formControlName="email" placeholder="Write here user email" required matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Name: </mat-label>
-          <input formControlName="name" type="text" required placeholder="Write here user name" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Phone: </mat-label>
-          <input formControlName="phone" required type="text" placeholder="Write here user telephone" matInput>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>date: </mat-label>
-          <input formControlName="date" required type="date" placeholder="Write here user telephone" matInput>
-        </mat-form-field>
-
-        <button type="submit" [disabled]="!createNewUserSpotify.valid">
-          Save`
-        </button>
-      </form>
+<div class="container-full-width">
+  <div class="flex">
+    <div class="border-gray-900 border-solid border-2 rounded-lg p-3">
+      <div>
+        <p>
+          Users actives 0
+        </p>
+        <p>
+          Users pendings 0
+        </p>
+      </div>
+      <div class="w-full">
+        <p class="text-center">Spotify</p>
+      </div>
     </div>
   </div>
 </div>
-
-
-<div>
-  <div>
-    <h1>View users</h1>
-    <div *ngIf="clients.length > 1">
-      <ng-container *ngFor="let client of clients">
-        <div class="flex">
-          <div>
-            <h2>
-            {{client?.name}}
-            </h2>
-            <span>
-              {{client?.email}}
-            </span>
-          </div>
-          <div>
-          </div>
-          <div>
-            <h3>Billing day {{client?.date}}</h3>
-            <button mat-button>
-              {{client?.paid}}
-            </button>
-          </div>
-        </div>
-      </ng-container>
-    </div>
-  </div>
-</div>
-

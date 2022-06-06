@@ -46,6 +46,7 @@ environment.prod.ts
 environment.ts
 firebaseConfig.ts
 .env
+package-lock.json
 
 # System Files
 .DS_Store

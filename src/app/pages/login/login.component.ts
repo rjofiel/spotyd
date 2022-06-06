@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UserData } from 'src/assets/interfaces/user-data';
 import { AuthService } from 'src/auth/auth.service';
 
 @Component({
