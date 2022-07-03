@@ -1,17 +1,80 @@
-<mat-toolbar color="accent">
-  <div class="flex">
-
-    <span>
-      Spotyd
-    </span>
-    <div>
-      <div>
-      </div>
+<mat-toolbar class="shadow fixed z-10">
+  <div class="flex items-center justify-between space-x-2 w-full">
+    <div class="flex items-center space-x-2">
+      <ng-container *ngIf="isAppsHidden$ | async">
+        <button #apps mat-icon-button (click)="toggleNavbar()">
+          <mat-icon>apps</mat-icon>
+        </button>
+      </ng-container>
+      <a class="title-m" [routerLink]="['/home']">Spotifyd</a>
     </div>
+    <app-user-avatar class="pr-2"></app-user-avatar>
   </div>
-
 </mat-toolbar>
-
-<section class="container-fullwidth">
-  <router-outlet></router-outlet>
-</section>
+<main class="main">
+  <div #navbar class="navbar" [ngClass]="{ opened: isNavbarOpened$ | async }">
+    <a [routerLink]="['/', urlRoutes.home]" class="link title-m">
+      <div class="flex justify-center items-center w-10">
+        <mat-icon>home</mat-icon>
+      </div>
+      <span class="text-left min-w-[55px]">Home</span>
+    </a>
+    <a (click)="toggleSpotifyMenu()" class="link title-m">
+      <div class="flex justify-center items-center w-10">
+        <mat-icon svgIcon="spotify"></mat-icon>
+      </div>
+      <span class="text-left min-w-[55px]">Spotify</span>
+      <mat-icon
+        class="transition-all ease-in-out delay-100"
+        [ngClass]="{ 'rotate-180': (showOptions$ | async) }"
+        >keyboard_arrow_up</mat-icon
+      >
+    </a>
+    <div class="menu" [ngClass]="{ hide: (showOptions$ | async) === false }">
+      <a
+        [routerLink]="['/', urlRoutes.spotify, urlRoutes.users, urlRoutes.list]"
+        class="link title-m px-8"
+      >
+        <div class="flex justify-center items-center w-10">
+          <mat-icon>person</mat-icon>
+        </div>
+        <span class="text-left min-w-[55px]">Users</span>
+      </a>
+      <a
+        [routerLink]="[
+          '/',
+          urlRoutes.spotify,
+          urlRoutes.families,
+          urlRoutes.list
+        ]"
+        class="link title-m px-8"
+      >
+        <div class="flex justify-center items-center w-10">
+          <mat-icon>supervisor_account</mat-icon>
+        </div>
+        <span class="text-left min-w-[55px]">Families</span>
+      </a>
+    </div>
+    <a class="link title-m bg-gray-500">
+      <div class="flex justify-center items-center w-10">
+        <mat-icon svgIcon="netflix"></mat-icon>
+      </div>
+      <span class="text-left min-w-[55px]">Netflix</span>
+      <mat-icon
+        class="transition-all ease-in-out delay-100"
+        [ngClass]="{ 'rotate-180': (showOptions$ | async) }"
+        >lock</mat-icon
+      >
+      <!-- keyboard_arrow_up -->
+    </a>
+    <a [routerLink]="['/', urlRoutes.settings]" class="link title-m">
+      <div class="flex justify-center items-center w-10">
+        <mat-icon>settings</mat-icon>
+      </div>
+      <span class="text-left min-w-[55px]">Admin</span></a
+    >
+  </div>
+  <div class="w-full h-full page">
+    <router-outlet></router-outlet>
+  </div>
+</main>

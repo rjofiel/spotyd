@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CustomIconsService } from 'src/assets/shared/services/custom-icons.service';
 
 @Component({
   selector: 'app-root',

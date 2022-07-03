@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppInitService } from './app-init.service';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     AppInitService,
@@ -29,7 +30,6 @@ import { CommonModule } from '@angular/common';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 
 export function appInitializer(appInitializer: AppInitService): any {
   return () => appInitializer.init();

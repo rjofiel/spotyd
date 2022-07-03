@@ -1,6 +1,8 @@
-.container-fullwidth {
-  max-width: 1440px;
-  margin: auto;
+@import "variables";
+
+
+.page{
+  padding-top: calc(#{$toolbar-height} + 1.25rem) ; //Add margin to top
 }
 
 .avatar {
@@ -10,8 +12,54 @@
   height: 80px;
 }
 
-.flex {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.navbar {
+  @apply w-full fixed h-full min-h-screen;
+  background-color: $color-neutral-l1;
+  padding-top: $toolbar-height; //Add margin to top
+  max-width: 19rem;
+  z-index: 1;
+  transform: translateX(-450px);
+  transition: all ease-in-out 360ms;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+  &.opened {
+    transform: translateX(0px);
+    transition: all ease-in-out 550ms;
+  }
+}
+
+.link {
+  @apply text-center mx-auto py-3 flex items-center space-x-2 cursor-pointer;
+  color: $color-white;
+  border: 0px solid $color-primary;
+  &:hover {
+    color: $color-primary-l2;
+    border-bottom: 1px;
+    border-style: solid;
+  }
+}
+
+.menu {
+  @apply opacity-100 ease-in-out transition-all duration-300 z-0 overflow-hidden;
+  .link {
+    @apply ease-in-out transition-all duration-300;
+    transform: translateY(0px);
+  }
+  &.hide {
+    @apply opacity-0;
+    z-index: -1;
+    animation: hiddenMenu 450ms forwards;
+    .link {
+      transform: translateY(-100px);
+    }
+  }
+}
+
+@keyframes hiddenMenu {
+  from {
+    position: relative;
+  }
+  to {
+    position: absolute;
+  }
 }

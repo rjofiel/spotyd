@@ -1,7 +1,7 @@
 import { SpotifyUser } from "./user-data";
 
 export interface FamilySpotify {
-  number: number;
+  number: number | null;
   email: string;
   address: string;
   members?: SpotifyUser[];
