@@ -48,6 +48,4 @@ readonly setSpotifyFamilyListInProgress = this._spotifyFamilyList.setInProgressF
 readonly getSpotifyFamilyListInProgress = this._spotifyFamilyList.getInProgressFunction();
 readonly setSpotifyFamilyListError = this._spotifyFamilyList.setErrorFunction();
 readonly getSpotifyFamilyListError = this._spotifyFamilyList.getErrorFunction();
-
-
 }

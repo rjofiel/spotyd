@@ -60,7 +60,8 @@ export class SpotifyUpdateUsersComponent implements OnInit, OnDestroy {
   }
 
   selectedFamily(id: number): void {
-    this._spotifyUsersSvc.selectedSpotifyFamily(id);
+    this._spotifyUsersSvc.selectedSpotifyFamily(id).subscribe(
+      (spotifyFamily: FamilySpotify | null) => this._spotifyUsersSvc.setSpotifyFamily(spotifyFamily));
   }
 
   onClickSaveUser(): void {

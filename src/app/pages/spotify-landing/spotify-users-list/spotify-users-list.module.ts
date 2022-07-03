@@ -11,7 +11,10 @@ import { SpotifyUsersListComponent } from './spotify-users-list.component';
 import { SpotifyUpdateUsersRoutingModule } from './spotify-users-list.routing.module';
 
 const material = [
-  MatTableModule
+  MatTableModule,
+  ReactiveFormsModule,
+  FormsModule,
+  MatInputModule
 ];
 
 @NgModule({
@@ -23,9 +26,6 @@ const material = [
     RouterModule,
     SpotifyUpdateUsersRoutingModule,
     DirectivesModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatInputModule,
     SharedComponentsModule,
     ...material
   ],

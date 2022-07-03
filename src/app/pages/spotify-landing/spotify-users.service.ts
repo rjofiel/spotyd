@@ -13,7 +13,9 @@ export class SpotifyUsersService {
 
   constructor(
     private _spotifyState: SpotifyState
-  ) { }
+  ) {
+    this.loadSpotifyFamilyList();
+   }
 
   setSpotifyUser(spotifyUser: SpotifyUser | null): void {
     this._spotifyState.setSpotifyUser(spotifyUser);
@@ -29,6 +31,10 @@ export class SpotifyUsersService {
 
   getSpotifyUserList(): Observable<SpotifyUser[] | null> {
     return this._spotifyState.getSpotifyUserList$();
+  }
+
+  setSpotifyFamily(spotifyFamily: FamilySpotify | null): void {
+      this._spotifyState.setSpotifyFamily(spotifyFamily);
   }
 
   getSpotifyFamily(): Observable<FamilySpotify | null>{
@@ -51,6 +57,14 @@ export class SpotifyUsersService {
       }));
   }
 
+  createNewSpotifyFamily(spotifyFamily: FamilySpotify): Observable<FamilySpotify> {
+    return of(spotifyFamily).pipe(
+      map(spotifyFamily => {
+        spotifyFamily.number = Math.floor(Math.random() * 100 + 1);
+      return spotifyFamily;
+      }));
+  }
+
   loadSpotifyFamilyList(): void {
     this.setSpotifyFamilyList(mockFamilies);
   }
@@ -59,8 +73,8 @@ export class SpotifyUsersService {
     this.setSpotifyUsersList(mockUsers);
   }
 
-  selectedSpotifyFamily(id: number): void {
-    this.getSpotifyFamilyList$().pipe(
+  selectedSpotifyFamily(id: number): Observable<FamilySpotify | null> {
+    return this.getSpotifyFamilyList$().pipe(
       filter(spotifyFamilyList => !!spotifyFamilyList),
       map(spotifyFamilyList =>{
         const spotifyFamilyFound = spotifyFamilyList?.filter(spotifyFamily => spotifyFamily.number === id);
@@ -70,7 +84,7 @@ export class SpotifyUsersService {
         return null;
       }),
       take(1)
-    ).subscribe((spotifyFamily: FamilySpotify | null) => this._spotifyState.setSpotifyFamily(spotifyFamily));
+    );
   }
 
   selectedSpotifyUser(id: number): Observable<SpotifyUser | null> {
@@ -90,8 +104,21 @@ export class SpotifyUsersService {
         map(spotifyUserList =>
           spotifyUserList?.filter(spotifyUser => spotifyUser.id !== id)),
         take(1)
-      ).subscribe(spotifyUserList => { if (typeof spotifyUserList !== 'undefined') this._spotifyState.setSpotifyUserList(spotifyUserList)});
+      ).subscribe(spotifyUserList => {
+        if (typeof spotifyUserList !== 'undefined') this._spotifyState.setSpotifyUserList(spotifyUserList); });
     }
   }
+
+  removeFamilySpotify(id: number | null): void{
+    if (id !== null){
+      this._spotifyState.getSpotifyFamilyList$().pipe(
+        map(spotifyFamilyList =>
+          spotifyFamilyList?.filter(spotifyFamily => spotifyFamily.number !== id )),
+        take(1)
+      ).subscribe(spotifyFamiliesList => {
+        if (typeof spotifyFamiliesList !== 'undefined') this._spotifyState.setSpotifyFamilyList(spotifyFamiliesList); })
+    }
+  }
+
 
 }

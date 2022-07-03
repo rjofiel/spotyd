@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { BtnSize } from 'src/assets/directives/model';
 import { SpotifyUser, StatusUser } from 'src/assets/interfaces/user-data';
+import { UrlRoutes } from 'src/assets/url-routes.routes';
 import { SpotifyUsersService } from '../spotify-users.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class SpotifyUsersListComponent implements OnInit{
   spotifyUsersList$: Observable<SpotifyUser[] | null> = this._spotifyUsersSvc.getSpotifyUserList().pipe(
     filter(spotifyUserList => spotifyUserList !== null));
 
-  columnsToShow: string[] = ['id','name', 'email', 'date', 'status', 'action'];
+  columnsToShow: string[] = ['id', 'name', 'email', 'date', 'status', 'action'];
 
   btnSize = BtnSize;
 
@@ -31,7 +32,7 @@ export class SpotifyUsersListComponent implements OnInit{
   }
 
   onSpotifyUserClickedRedirecToEdit(id: number | null): void {
-    if (id !== null) this._router.navigate(['/spotify', id, 'edit']);
+    if (id !== null) this._router.navigate(['/', UrlRoutes.spotify, UrlRoutes.users, id, UrlRoutes.edit]);
   }
 
   onSpotifyUserClickedRemove(id: number | null): void {
@@ -42,7 +43,7 @@ export class SpotifyUsersListComponent implements OnInit{
     const spotifyUser = this.newSpotifyUser();
     this._spotifyUsersSvc.createNewSpotifyUser(spotifyUser).pipe(
       filter(spotifyUser => !!spotifyUser)
-    ).subscribe(spotifyUser => this.onSpotifyUserClickedRedirecToEdit(spotifyUser.id))
+    ).subscribe(spotifyUser => this.onSpotifyUserClickedRedirecToEdit(spotifyUser.id));
   }
 
   private newSpotifyUser(): SpotifyUser {
